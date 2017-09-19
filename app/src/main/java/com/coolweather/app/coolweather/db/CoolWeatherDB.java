@@ -119,8 +119,8 @@ public class CoolWeatherDB {
     public void saveCountry(Country country){
         if(country != null){
             ContentValues values = new ContentValues();
-            values.put("country_name",country.getCountryName());
             values.put("country_code",country.getCountryCode());
+            values.put("country_name",country.getCountryName());
             values.put("city_id",country.getCityId());
             db.insert("Country",null,values);
         }
@@ -139,8 +139,8 @@ public class CoolWeatherDB {
                 Country country = new Country();
                 country.setId(cursor.getInt(cursor.getColumnIndex("id")));
                 country.setCityId(cityId);
-                country.setCountryCode(cursor.getString(cursor.getColumnIndex("country_code")));
                 country.setCountryName(cursor.getString(cursor.getColumnIndex("country_name")));
+                country.setCountryCode(cursor.getString(cursor.getColumnIndex("country_code")));
                 list.add(country);
             }while (cursor.moveToNext());
         }
