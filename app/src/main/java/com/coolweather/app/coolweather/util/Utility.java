@@ -91,7 +91,6 @@ public class Utility {
      */
     public static void handleWeatherResponse(Context context,String response){
         try {
-            Log.d("TGA","Utility 94 天气字符串 "+response);
             JSONObject jsonObject = new JSONObject(response);
             JSONObject weatherInfo = jsonObject.getJSONObject("weatherinfo");
             String cityname = weatherInfo.getString("city");
@@ -101,9 +100,7 @@ public class Utility {
             String weatherDesp = weatherInfo.getString("weather");
             String publishTime = weatherInfo.getString("ptime");
             saveWeatherInfo(context,cityname,weatherCode,temp1,temp2,weatherDesp,publishTime);
-            Log.d("TGA","Utility"+" 已经执行了saveWeatherInfo");
         }catch (Exception e){
-            Log.d("TGA","Utility"+"出现异常"+e.getMessage());
             e.printStackTrace();
         }
     }
@@ -123,7 +120,6 @@ public class Utility {
         editor.putString("weather_desp",weatherDesp);
         editor.putString("publish_time",publishTime);
         editor.putString("current_data",sdf.format(new Date()));
-        Log.d("TGA","将要缓存的数据Utility"+cityName+" "+temp1+"   "+" "+temp2);
         editor.commit();
     }
 
