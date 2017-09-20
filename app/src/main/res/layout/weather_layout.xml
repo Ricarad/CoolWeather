@@ -27,7 +27,7 @@
             android:id="@+id/refresh_weather"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/logo"
+            android:background="@drawable/refresh"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"/>
