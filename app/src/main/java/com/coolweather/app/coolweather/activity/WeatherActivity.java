@@ -75,7 +75,6 @@ public class WeatherActivity extends Activity implements View.OnClickListener{
         temp2Text = (TextView)findViewById(R.id.temp2);
         currentDateText = (TextView)findViewById(R.id.current_Data);
         String countryCode = getIntent().getStringExtra("country_code");
-        Log.d("TGA","66乡村代码"+countryCode);
         if(!TextUtils.isEmpty(countryCode)){
             //有县级代号时就去查询天气
             publishText.setText("同步中...");

@@ -4,15 +4,18 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaRouter;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,7 +40,7 @@ public class ChooseAreaActivity extends Activity {
     public static final int LEVEL_PROVINCE = 0;
     public static final int LEVEL_CITY = 1;
     public static final int LEVEL_COUNTRY = 2;
-
+    private Button mapView;
     private ProgressDialog progressDialog;
     private TextView titleText;
     private ListView listView;
@@ -72,7 +75,13 @@ public class ChooseAreaActivity extends Activity {
      * 当前选中的级别
      */
     private int currentLevel;
-
+    /**
+     * 初始化夜间模式
+     */
+    /*private void setNightMode(){
+        boolean nightMode = MediaRouter.UserRouteInfo.isNight(this);
+        AppCompatDelegate.setDefaultNightMode(nightMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+    }*/
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +96,16 @@ public class ChooseAreaActivity extends Activity {
         }
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.choose_area);
+        //设置SlideMenu功能
+       
+        mapView = (Button)findViewById(R.id.map_view);
+        mapView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChooseAreaActivity.this,MapActivity.class);
+                startActivity(intent);
+            }
+        });
         listView = (ListView)findViewById(R.id.list_view);
         titleText = (TextView)findViewById(R.id.title_text);
         adapter = new ArrayAdapter<String>(ChooseAreaActivity.this,android.R.layout.simple_list_item_1,dataList);
@@ -118,7 +137,7 @@ public class ChooseAreaActivity extends Activity {
      */
     private void queryProvinces(){
         provinceList = coolWeatherDB.loadProvinces();
-        Log.d("TGA","128 "+provinceList.size());
+
         if(provinceList.size() > 0){
             dataList.clear();
             for(Province province : provinceList){

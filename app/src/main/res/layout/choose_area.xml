@@ -7,11 +7,21 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:background="#484E61">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="地图"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:background="#484E61"
+        android:id="@+id/map_view"/>
     <TextView
         android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_centerInParent="true"
+        android:text="北京"
         android:textColor="#fff"
         android:textSize="24sp"/>
 </RelativeLayout>
