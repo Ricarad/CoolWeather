@@ -28,6 +28,7 @@ import com.coolweather.app.coolweather.model.Province;
 import com.coolweather.app.coolweather.util.HttpCallbackListener;
 import com.coolweather.app.coolweather.util.HttpUtil;
 import com.coolweather.app.coolweather.util.Utility;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +98,23 @@ public class ChooseAreaActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.choose_area);
         //设置SlideMenu功能
-       
+        SlidingMenu slidingMenu = new SlidingMenu(this);
+        slidingMenu.setMode(SlidingMenu.LEFT);
+        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+        slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
+        //SlidingMenu划出时主页面显示的剩余宽度
+        //slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        //设置SlidingMenu菜单的宽度
+        slidingMenu.setBehindWidthRes(R.dimen.slidingmenu_offset_large);
+        // 设置渐入渐出效果的值
+        slidingMenu.setFadeDegree(0.35f);
+        /**
+         * SLIDING_WINDOW will include the Title/ActionBar in the content
+         * section of the SlidingMenu, while SLIDING_CONTENT does not.
+         */
+        slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        //为侧滑菜单设置布局
+        slidingMenu.setMenu(R.layout.slidemenu_left);
         mapView = (Button)findViewById(R.id.map_view);
         mapView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +123,7 @@ public class ChooseAreaActivity extends Activity {
                 startActivity(intent);
             }
         });
+
         listView = (ListView)findViewById(R.id.list_view);
         titleText = (TextView)findViewById(R.id.title_text);
         adapter = new ArrayAdapter<String>(ChooseAreaActivity.this,android.R.layout.simple_list_item_1,dataList);

@@ -31,4 +31,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/BaiduLBS_Android.jar')
     compile(name: 'sliding_menu_lib', ext: 'aar')
+
 }

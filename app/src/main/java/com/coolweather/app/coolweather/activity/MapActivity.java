@@ -40,7 +40,7 @@ public class MapActivity extends Activity {
     LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-                navigateTo(location);
+            navigateTo(location);
         }
 
         @Override
@@ -58,16 +58,27 @@ public class MapActivity extends Activity {
 
         }
     };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.map_baudu);
         mapView = (MapView) findViewById(R.id.map_view);
-        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
         provider = locationManager.NETWORK_PROVIDER;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         location = locationManager.getLastKnownLocation(provider);
         if (location != null) {
             navigateTo(location);
